@@ -101,9 +101,11 @@ Goal generated
    ↓
 Event generated
    ↓
-Applicable plan found?
-   ├─ Yes → Intention created → Plan steps executed → Actions or new beliefs
-   └─ No  → Pending → retry/fail within window
+Plan found for Goal?
+   ├─ No  → Pending → retry/fail within window
+   └─ Yes → Context satisfied?
+              ├─ No  → Pending → retry/fail within window
+              └─ Yes → Intention created → Plan steps executed → Actions or new beliefs
 ```
 
 ## Practical Notes

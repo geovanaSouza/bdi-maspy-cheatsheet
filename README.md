@@ -21,6 +21,20 @@ Goal("finish_mission")
 
 A Goal says **what** the agent wants. It is not an action and not knowledge.
 
+In MASPY, a Goal can have a lifecycle:
+
+- It may remain **pending** while its context condition is not satisfied.
+- It may be **reevaluated** during a limited window; if the condition still is not met, the Goal may **fail**.
+- A Belief is usually consumed if no applicable plan is found, without the same pending/failure lifecycle.
+
+Example with a condition:
+
+```python
+@pl(gain, Goal("finish_mission"), context=Belief("ready"))
+def finish(self, src):
+    self.print("Finishing mission")
+```
+
 ## Plan
 
 A Plan is a rule or strategy used to react to an event or to achieve a goal.
@@ -37,21 +51,8 @@ A Plan defines **when** and **how** to act, but does not execute by itself.
 
 ## Intention
 
-An Intention is a concrete commitment to execute a Plan for a relevant event or goal.
-
-```text
-Belief update
-   ↓
-Event generated
-   ↓
-Applicable plan found
-   ↓
-Intention created
-   ↓
-Plan body executed
-```
-
-The Intention links the plan to the concrete situation.
+An Intention is a concrete commitment to execute a Plan for a relevant event or goal.  
+It links the plan to the concrete situation and carries the arguments needed to execute it.
 
 ## BDI Flow
 

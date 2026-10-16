@@ -23,9 +23,29 @@ A Goal says **what** the agent wants. It is not an action and not knowledge.
 
 In MASPY, a Goal can have a lifecycle:
 
-- It may remain **pending** while its context condition is not satisfied.
-- It may be **reevaluated** during a limited window; if the condition still is not met, the Goal may **fail**.
-- A Belief is usually consumed if no applicable plan is found, without the same pending/failure lifecycle.
+```text
+Goal created
+   ↓
+Context satisfied?
+   ├─ Yes → Plan selected → Intention created → Executed
+   └─ No  → Pending
+             ↓
+        Within retry window?
+             ├─ Yes → Reevaluate
+             │          ├─ Condition met → Plan selected → Intention created → Executed
+             │          └─ Still missing → Stay pending
+             └─ No  → Goal fails
+```
+
+For comparison, a Belief usually follows a simpler path:
+
+```text
+Belief event
+   ↓
+Applicable plan?
+   ├─ Yes → Intention created → Executed
+   └─ No  → Event consumed (no automatic retry)
+```
 
 Example with a condition:
 

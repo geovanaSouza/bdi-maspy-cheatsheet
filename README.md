@@ -21,6 +21,8 @@ Goal("finish_mission")
 
 A Goal says **what** the agent wants. It is not an action and not knowledge.
 
+## Belief vs Goal
+
 In MASPY, a Goal can have a lifecycle:
 
 ```text
@@ -81,15 +83,12 @@ Perception or knowledge update
    ↓
 Belief update
    ↓
-Event generated
+Event generated (Belief or Goal)
    ↓
-Applicable plan found
-   ↓
-Intention created
-   ↓
-Plan steps executed
-   ↓
-Actions or new beliefs
+Applicable plan found?
+   ├─ Yes → Intention created → Plan steps executed → Actions or new beliefs
+   └─ No  → Belief: consumed
+              Goal: pending → retry/fail within window
 ```
 
 ## Practical Notes

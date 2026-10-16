@@ -78,17 +78,32 @@ It links the plan to the concrete situation and carries the arguments needed to 
 
 ## BDI Flow
 
+### Belief Flow
+
 ```text
-Perception or knowledge update
+Perception / knowledge update
    ↓
 Belief update
    ↓
-Event generated (Belief or Goal)
+Event generated
    ↓
 Applicable plan found?
    ├─ Yes → Intention created → Plan steps executed → Actions or new beliefs
-   └─ No  → Belief: consumed
-              Goal: pending → retry/fail within window
+   └─ No  → Event consumed
+```
+
+### Goal Flow
+
+```text
+Desire / objective / planning / communication
+   ↓
+Goal generated
+   ↓
+Event generated
+   ↓
+Applicable plan found?
+   ├─ Yes → Intention created → Plan steps executed → Actions or new beliefs
+   └─ No  → Pending → retry/fail within window
 ```
 
 ## Practical Notes
